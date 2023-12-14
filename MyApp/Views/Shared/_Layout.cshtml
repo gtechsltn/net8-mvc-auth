@@ -1,0 +1,69 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyApp</title>
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/buttons.css" />
+    <link rel="stylesheet" href="/assets/css/svg-auth.css" />
+    <link rel="stylesheet" href="/assets/css/default.css" />
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="svg-logo svg-lg mr-1"></i>
+                    MyApp
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @Html.Navbar(ViewUtils.NavItems, new NavOptions { 
+                        NavClass = "navbar-nav flex-grow-1",
+                        NavLinkClass = "nav-link text-dark",
+                    })
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container mt-2">
+            &copy; @DateTime.Now.Year - MyApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script>exports = window</script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.validate.min.js"></script>
+    <script src="/assets/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/servicestack-client.js"></script>
+
+    <script src="/assets/js/dtos.js"></script>
+    <script src="/assets/js/default.js"></script>
+
+    <script>
+        const lib = window["@@servicestack/client"];
+        for (const k in lib) { window[k] = lib[k] }
+        window.client = new JsonServiceClient('/')
+    </script>
+
+    @await RenderSectionAsync("scripts", required: false)
+
+</body>
+</html>
